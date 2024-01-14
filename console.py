@@ -192,5 +192,6 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict__[x] = v
         storage.save()
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
