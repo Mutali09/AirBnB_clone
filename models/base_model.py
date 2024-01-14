@@ -1,19 +1,19 @@
 #!/usr/bin/python3
-"""This defines the BaseModel class."""
+"""Defines the BaseModel class."""
 import models
 from uuid import uuid4
 from datetime import datetime
 
 
 class BaseModel:
-    """This is a representation of BaseModel of HBnB project."""
+    """Represents the BaseModel of the HBnB project."""
 
     def __init__(self, *args, **kwargs):
-        """New BaseModel Initialization.
+        """Initialize a new BaseModel.
 
         Args:
             *args (any): Unused.
-            **kwargs (dict): key/value pairs of the attributes.
+            **kwargs (dict): Key/value pairs of attributes.
         """
         tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
@@ -29,17 +29,15 @@ class BaseModel:
             models.storage.new(self)
 
     def save(self):
-        """Update the last modification time, which is updated_at, and save object to storage."""
+        """Update updated_at with the current datetime."""
         self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
-        """Return a dictionary representation ofBaseModel instance.
+        """Return the dictionary of the BaseModel instance.
 
-        Includes the key/value pairs for all attributes, with special
-        handling for created_at and updated_at attritbutes, which are converted
-        to ISO format strings. Includes key/value pair for __class__ representing
-        class name of object.
+        Includes the key/value pair __class__ representing
+        the class name of the object.
         """
         rdict = self.__dict__.copy()
         rdict["created_at"] = self.created_at.isoformat()
@@ -48,10 +46,6 @@ class BaseModel:
         return rdict
 
     def __str__(self):
-        """Return the string representation of BaseModel instance.
-
-        Displays the class name, ID, and key/value pairs of
-        attributes in a formatted string.
-        """
+        """Return the print/str representation of the BaseModel instance."""
         clname = self.__class__.__name__
         return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
